@@ -2,25 +2,46 @@
 <%- include('includes/nav') %>
     <div class="container">
         <div class="row">
-            <div class="col-lg-2"></div>
-            <div class="col-lg-8 my-3">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10 my-3">
                 <h1 class="text-center">Agenda</h1>
                 <p class="text-center lead">Seus contatos estão abaixo:</p>
 
                 <%- include('includes/messages') %>
 
+                <% if(contacts.length) { %>
                 <div class="responsive-table">
                     <table class="table my-3">
-                        <tr>
-                            <td>Douglas</td>
-                            <td>Rangel</td>
-                            <td>81994123653</td>
-                            <td>mail@mail.com</td>
-                        </tr>
+                        <thead>
+                           <tr class="table-secondary">
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th></th>
+                            <th></th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                            <% contacts.forEach(item => { %>
+                                <tr class="table-light">
+                                    <td><%= item.nome %></td>
+                                    <td><%= item.sobrenome %></td>
+                                    <td><%= item.telefone %></td>
+                                    <td><%= item.email %></td>
+                                    <td><a href="/contato/<%= item._id %>">Editar</a></td>
+                                    <td><a class="text-danger" href="/contato/delete/<%= item._id %>">Excluir</a></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
                     </table>
                 </div>
+                <% } else { %>
+                    <h4 class="text-center my-3 mt-5">Nenhum contato cadastrado.</h4>
+                    <div class="text-center"><a href="/contato">Clique aqui para cadastrar</a></div>
+                <% } %>
             </div>
-            <div class="col-lg-2"></div>
+            <div class="col-lg-1"></div>
         </div>
     </div>
 <%- include('includes/footer') %>
