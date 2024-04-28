@@ -1,8 +1,13 @@
 const Login = require("../models/LoginModel")
 
 exports.index = (req, res) => {
-  if(req.session.user) return res.render('admin')
+  if(req.session.user) return res.redirect('/admin')
   return res.render("login")
+}
+
+exports.admin = (req, res) => {
+  if(req.session.user) return res.render('admin')
+  return res.redirect("/login")
 }
 
 exports.register = async (req, res) => {
